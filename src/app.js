@@ -16,7 +16,18 @@ app.use("/records", require("./routes/record.routes"));
 app.use("/dashboard", require("./routes/dashboard.routes"));
 
 app.get("/", (req, res) => {
-  res.send("API is running 🚀");
+  res.send(`
+    <h1>🚀 Finance Backend API</h1>
+    <p>Status: Running Successfully ✅</p>
+    <h3>Available Endpoints:</h3>
+    <ul>
+      <li>/auth/register</li>
+      <li>/auth/login</li>
+      <li>/records</li>
+      <li>/dashboard/summary</li>
+    </ul>
+    <p>Developed by Manu 💻</p>
+  `);
 });
 
 module.exports = app;
