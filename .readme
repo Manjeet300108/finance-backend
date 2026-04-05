@@ -1,35 +1,35 @@
-# 💰 Finance Data Processing & Access Control Backend
+# Finance Data Processing & Access Control Backend
 
-##  Project Overview
+## Project Overview
 
-This project is a backend system built for managing financial records with **role-based access control (RBAC)**. It is designed to simulate a real-world finance dashboard backend where different users interact with financial data based on their permissions.
+This project is a backend system built for managing financial records with role-based access control (RBAC). It simulates a real-world finance dashboard where different users interact with financial data based on their permissions.
 
-The system focuses on clean architecture, proper data handling, secure access control, and efficient API design.
-
----
-
-##  Tech Stack
-
-* **Backend:** Node.js, Express.js
-* **Database:** MongoDB (Mongoose)
-* **Authentication:** JSON Web Tokens (JWT)
-* **Password Security:** bcryptjs
-* **Environment Config:** dotenv
+The system focuses on clean architecture, structured API design, secure authentication, and efficient data handling.
 
 ---
 
-##  Key Features
+## Tech Stack
 
-###  User & Role Management
+* Backend: Node.js, Express.js
+* Database: MongoDB (Mongoose)
+* Authentication: JSON Web Tokens (JWT)
+* Password Security: bcryptjs
+* Environment Configuration: dotenv
+
+---
+
+## Key Features
+
+### User and Role Management
 
 * User registration and login
 * Role-based access control (RBAC)
-* Roles supported:
+* Supported roles:
 
-  * **Viewer** → Read-only access
-  * **Analyst** → Read + analytics access
-  * **Admin** → Full access (CRUD + user management)
-* User status (active/inactive)
+  * Viewer: Read-only access
+  * Analyst: Read access with analytics
+  * Admin: Full access (CRUD + user management)
+* User status management (active/inactive)
 
 ---
 
@@ -53,14 +53,14 @@ The system focuses on clean architecture, proper data handling, secure access co
 
 ### Dashboard APIs
 
-* Total Income
-* Total Expenses
-* Net Balance
-* Aggregation using MongoDB pipelines
+* Total income
+* Total expenses
+* Net balance
+* Aggregations using MongoDB pipelines
 
 ---
 
-###  Access Control
+### Access Control
 
 * Middleware-based role authorization
 * Secure API endpoints
@@ -68,16 +68,16 @@ The system focuses on clean architecture, proper data handling, secure access co
 
 ---
 
-###  Validation & Error Handling
+### Validation and Error Handling
 
-* Proper status codes
-* Try-catch error handling
+* Proper HTTP status codes
+* Try-catch based error handling
 * Meaningful error responses
 * Protection against invalid operations
 
 ---
 
-##  Project Structure
+## Project Structure
 
 finance-backend/
 │
@@ -95,24 +95,26 @@ finance-backend/
 
 ---
 
-##  Setup Instructions
+## Setup Instructions
 
-### 1️ Clone the Repository
+### 1. Clone the Repository
 
 git clone https://github.com/Manjeet300108/finance-backend
 cd finance-backend
 
 ---
 
-### 2️ Install Dependencies
+### 2. Install Dependencies
 
 npm install
 
 ---
 
-### 3️ Configure Environment Variables
+### 3. Environment Variables
 
-Create a `.env` file:
+The application uses environment variables for configuration. The following variables are required:
+
+#### Local Development (.env)
 
 PORT=5000
 MONGO_URI=mongodb://127.0.0.1:27017/financeDB
@@ -120,7 +122,23 @@ JWT_SECRET=secret123
 
 ---
 
-### 4️ Run the Server
+#### Production (Deployment)
+
+PORT=5000
+MONGO_URI=mongodb+srv://<username>:<password>@cluster.mongodb.net/financeDB
+JWT_SECRET=secret123
+
+---
+
+### Notes
+
+* Replace `<username>` and `<password>` with your MongoDB Atlas credentials
+* Do not commit the `.env` file to version control
+* Use environment variables instead of hardcoding sensitive values
+
+---
+
+### 4. Run the Server
 
 npm run dev
 
@@ -129,46 +147,44 @@ http://localhost:5000
 
 ---
 
-##  Authentication Flow
+## Authentication Flow
 
-1. Register a user → `/auth/register`
-2. Login → `/auth/login`
+1. Register a user → /auth/register
+2. Login → /auth/login
 3. Receive JWT token
 4. Use token in headers:
 
-Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5Y2Q1OTE1Y2Q1YzI5ZDBkN2NmYWQwYSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc3NTA2NTk3M30.7aFJ1pylTUylT3vHQ8H_du4U3hqA67rXOyb8WehRZBc"
+Authorization: <JWT_TOKEN>
 
 ---
 
-##  API Endpoints
+## API Endpoints
 
-###  Auth APIs
+### Auth APIs
 
 * POST /auth/register → Register user
 * POST /auth/login → Login user
 
 ---
 
-###  Record APIs
+### Record APIs
 
 * GET /records → Get all records
-* POST /records → Create record (**Admin only**)
-* PUT /records/:id → Update record (**Admin only**)
-* DELETE /records/:id → Delete record (**Admin only**)
+* POST /records → Create record (Admin only)
+* PUT /records/:id → Update record (Admin only)
+* DELETE /records/:id → Delete record (Admin only)
 
 ---
 
-###  Dashboard APIs
+### Dashboard APIs
 
 * GET /dashboard/summary → Get financial summary
 
 ---
 
-##  API Testing
+## API Testing
 
-All APIs were tested using:
-
-* **Thunder Client (VS Code Extension)** ⚡
+All APIs were tested using Thunder Client (VS Code Extension).
 
 This tool was used to:
 
@@ -178,51 +194,9 @@ This tool was used to:
 
 ---
 
-##  Design Decisions
+## API Testing (Detailed)
 
-* MongoDB chosen for flexible schema and aggregation
-* Modular architecture for scalability
-* Middleware-based RBAC for clean access control
-* JWT authentication for stateless security
-
----
-
-## Assumptions
-
-* Default role is **viewer**
-* Admin privileges required for data modification
-* Authentication required for protected routes
-
----
-
-##  Future Improvements
-
-* Pagination support
-* Search functionality
-* Swagger API documentation
-* Unit & integration testing
-* Deployment
-
----
-
-##  Conclusion
-
-This project demonstrates backend engineering fundamentals including API design, role-based access control, database modeling, and error handling.
-
----
-
-
-==============================================================
-## 🔗 API Testing with Thunder Client (Detailed)
-
-All APIs were tested using **Thunder Client (VS Code Extension)** ⚡.
-Below are the exact routes and sample requests used during testing.
-
----
-
-### 🔐 Auth APIs
-
-#### ➤ Register User
+### Register User
 
 POST /auth/register
 
@@ -236,20 +210,9 @@ Request Body:
 }
 ```
 
-Response:
-
-```json
-{
-  "_id": "user_id",
-  "name": "Manu",
-  "email": "manu@gmail.com",
-  "role": "viewer"
-}
-```
-
 ---
 
-#### ➤ Login User
+### Login User
 
 POST /auth/login
 
@@ -272,17 +235,13 @@ Response:
 
 ---
 
-### 🔐 Authorization Header
-
-For protected routes, the following header was used:
+### Authorization Header
 
 Authorization: JWT_TOKEN
 
 ---
 
-### 💰 Record APIs
-
-#### ➤ Create Record (Admin Only)
+### Create Record
 
 POST /records
 
@@ -300,27 +259,25 @@ Request Body:
 
 ---
 
-#### ➤ Get All Records
+### Get Records
 
 GET /records
 
 ---
 
-#### ➤ Update Record
+### Update Record
 
 PUT /records/:id
 
 ---
 
-#### ➤ Delete Record
+### Delete Record
 
 DELETE /records/:id
 
 ---
 
-### 📊 Dashboard API
-
-#### ➤ Get Summary
+### Dashboard Summary
 
 GET /dashboard/summary
 
@@ -336,17 +293,49 @@ Response:
 
 ---
 
-### 🧪 Testing Workflow
+## Testing Workflow
 
-1. User registered using `/auth/register`
-2. Logged in via `/auth/login` to receive JWT token
+1. User registered using /auth/register
+2. Logged in via /auth/login to receive JWT token
 3. Token added in headers for protected routes
 4. Admin role assigned for testing record creation
-5. All endpoints tested and validated using Thunder Client
+5. All endpoints tested using Thunder Client
 
 ---
 
+## Design Decisions
 
-## 👨‍💻 Author
+* MongoDB chosen for flexible schema and aggregation
+* Modular architecture for scalability and maintainability
+* Middleware-based RBAC for clean access control
+* JWT authentication for stateless security
 
-MANJEET SINGH
+---
+
+## Assumptions
+
+* Default role is viewer
+* Admin privileges required for data modification
+* Authentication required for protected routes
+
+---
+
+## Future Improvements
+
+* Pagination support
+* Search functionality
+* Swagger API documentation
+* Unit and integration testing
+* Deployment enhancements
+
+---
+
+## Conclusion
+
+This project demonstrates backend engineering fundamentals including API design, role-based access control, database modeling, and error handling.
+
+---
+
+## Author
+
+Manjeet Singh
